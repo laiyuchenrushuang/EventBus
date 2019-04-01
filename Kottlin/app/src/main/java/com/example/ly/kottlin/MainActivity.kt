@@ -10,15 +10,20 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.io.File
+
+
 
 
 class MainActivity : AppCompatActivity() {
     var fileUrl :String ?= null
-    var  etUrl :EditText ?= null
+    var  etUrl :TextView ?= null
     var  btUrl :Button ?= null
     var  btOpen :Button ?= null
-
+    var  btSend :Button ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,12 +65,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "请选择或输入文件路径", Toast.LENGTH_SHORT).show()
             }
         }
+
+        btSend!!.setOnClickListener(){
+       val  i = Intent(this,SecondActivity::class.java)
+            startActivity(i);
+        }
     }
 
      fun init(){
+         EventBus.getDefault().register(this)
          etUrl =  findViewById(R.id.et_url)
          btUrl =  findViewById(R.id.bt_url)
          btOpen =  findViewById(R.id.bt_open)
+         btSend = findViewById(R.id.bt_open1)
 
      }
 
@@ -80,6 +92,16 @@ class MainActivity : AppCompatActivity() {
                 fileUrl = etUrl!!.getText().toString()
                 Log.d("lylog", fileUrl.toString());
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun Event(messageEvent: MessageEvent) {
+
+        runOnUiThread(){
+            Log.d("lylog","s.onclick ok msg ="+messageEvent.message  + "  etUrl = "+etUrl)
+            etUrl!!.setText(messageEvent.message)
+            etUrl!!.postInvalidate()
         }
     }
 }

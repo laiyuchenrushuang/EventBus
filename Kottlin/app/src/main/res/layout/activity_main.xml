@@ -5,30 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ly.kottlin.MainActivity">
+
     <LinearLayout
         android:id="@+id/first_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/et_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="请选择或输入文件路径"/>
+            android:hint="请选择或输入文件路径" />
 
         <Button
             android:id="@+id/bt_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选择路径"/>
+            android:text="选择路径" />
     </LinearLayout>
 
     <Button
         android:id="@+id/bt_open"
-        android:layout_below="@+id/first_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="打开文件"/>
+        android:layout_below="@+id/first_line"
+        android:text="打开文件" />
+
+    <Button
+        android:id="@+id/bt_open1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_open"
+        android:text="send" />
 </RelativeLayout>
