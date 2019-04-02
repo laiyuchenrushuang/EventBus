@@ -38,7 +38,7 @@ var text : Button? =null
             Log.d("lylog","s.onclick")
             EventBus.getDefault().post( MessageEvent("nihao  shijie"))
             val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }
